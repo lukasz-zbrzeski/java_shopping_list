@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,11 +105,20 @@ public class Options {
         products.remove(numberOfProduct - 1);
     }
 
-    private void saveShoppingListOnDisc() {
-        
+    private void saveShoppingListOnDisk() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("shopping_list.txt"));
+
+        for (Category category : shoppingList) {
+            bw.write(category.getCategoryName() + ":\n");
+            for (Product product : category.getProducts()) {
+                bw.write(product.getProductName() + "\n");
+            }
+        }
+
+        bw.close();
     }
 
-    public void chooseOption(int option, Scanner scanner) {
+    public void chooseOption(int option, Scanner scanner) throws IOException {
         if (option == 1) {
             addProductToShoppingList(scanner);
         } else if (option == 2) {
@@ -120,7 +132,7 @@ public class Options {
         } else if (option == 6) {
             deleteOneProductOfShoppingList(scanner);
         } else if (option == 7) {
-            saveShoppingListOnDisc();
+            saveShoppingListOnDisk();
         }
     }
 
