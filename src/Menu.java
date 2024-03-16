@@ -14,10 +14,9 @@ public class Menu {
         System.out.println("7. Zapisz listę zakupów na dysku.");
     }
 
-    public int chooseOption() {
+    public int chooseOption(Scanner scanner) {
         System.out.print("Podaj numer opcji: ");
 
-        Scanner scanner = new Scanner(System.in);
         int option;
         try {
             option = scanner.nextInt();
@@ -27,7 +26,6 @@ public class Menu {
         } catch (InputMismatchException e) {
             throw new NumberFormatException("Podana wartość nie jest liczbą!");
         }
-        scanner.close();
 
         return option;
     }
