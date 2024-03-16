@@ -12,6 +12,7 @@ public class Menu {
         System.out.println("5. Usuń wszystkie produkty z danej kategorii.");
         System.out.println("6. Usuń produkt z listy zakupów.");
         System.out.println("7. Zapisz listę zakupów na dysku.");
+        System.out.println("8. Zakończ program.");
     }
 
     public int chooseOption(Scanner scanner) {
@@ -20,7 +21,7 @@ public class Menu {
         int option;
         try {
             option = scanner.nextInt();
-            if (option <= 0 || option >= 8) {
+            if (option <= 0 || option >= 9) {
                 throw new IllegalArgumentException("Nieprawidłowy numer opcji!");
             }
         } catch (InputMismatchException e) {
