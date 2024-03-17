@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Menu {
 
     public void showMenu() {
+        System.out.println("=====================================================");
         System.out.println("Wybierz co chcesz zrobić:");
         System.out.println("1. Dodaj produkt do listy.");
         System.out.println("2. Wyświetl wszystkie produkty z listy.");

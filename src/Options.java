@@ -65,6 +65,13 @@ public class Options {
             category.addProduct(productName);
         }
 
+        System.out.println("Dodano produkt do listy zakupów.");
+
+    }
+
+    private void showWholeProductsOfShoppingList() {
+        System.out.println("Cała lista zakupów:");
+        showList(shoppingList);
     }
 
     private void showSelectedCategoryShoppingList(Scanner scanner) {
@@ -79,6 +86,7 @@ public class Options {
 
     private void deleteWholeProductsOfShoppingList() {
         shoppingList.clear();
+        System.out.println("Usunięto wszystkie produkty z listy zakupów.");
     }
 
     private void deleteOneCategoryOfShoppingList(Scanner scanner) {
@@ -89,6 +97,8 @@ public class Options {
         int numberOfCategory = scanner.nextInt();
 
         shoppingList.remove(numberOfCategory - 1);
+
+        System.out.println("Usunięto produkty z jednej kategorii z listy zakupów.");
     }
 
     private void deleteOneProductOfShoppingList(Scanner scanner) {
@@ -103,6 +113,12 @@ public class Options {
 
         ArrayList<Product> products = shoppingList.get(numberOfCategory - 1).getProducts();
         products.remove(numberOfProduct - 1);
+
+        if (products.size() == 0) {
+            shoppingList.remove(numberOfCategory - 1);
+        }
+
+        System.out.println("Usunięto produkt z listy zakupów.");
     }
 
     private void saveShoppingListOnDisk() throws IOException {
@@ -116,13 +132,15 @@ public class Options {
         }
 
         bw.close();
+
+        System.out.println("Zapisano listę na dysku w pliku shopping_list.txt");
     }
 
     public void chooseOption(int option, Scanner scanner) throws IOException {
         if (option == 1) {
             addProductToShoppingList(scanner);
         } else if (option == 2) {
-            showList(shoppingList);
+            showWholeProductsOfShoppingList();
         } else if (option == 3) {
             showSelectedCategoryShoppingList(scanner);
         } else if (option == 4) {
