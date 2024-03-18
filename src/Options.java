@@ -13,8 +13,12 @@ public class Options {
     }
 
     private void showCategories(ArrayList<Category> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i).getCategoryName());
+        if (list.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println((i + 1) + ". " + list.get(i).getCategoryName());
+            }
         }
     }
 
@@ -25,9 +29,13 @@ public class Options {
     }
 
     private void showList(ArrayList<Category> list) {
-        for (Category category : list) {
-            System.out.println(category.getCategoryName());
-            showProducts(category);
+        if (list.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            for (Category category : list) {
+                System.out.println(category.getCategoryName());
+                showProducts(category);
+            }
         }
     }
 
@@ -70,55 +78,75 @@ public class Options {
     }
 
     private void showWholeProductsOfShoppingList() {
-        System.out.println("Cała lista zakupów:");
-        showList(shoppingList);
+        if (shoppingList.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            System.out.println("Cała lista zakupów:");
+            showList(shoppingList);
+        }
     }
 
     private void showSelectedCategoryShoppingList(Scanner scanner) {
-        System.out.println("Dostępne kategorie:");
-        showCategories(shoppingList);
+        if (shoppingList.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            System.out.println("Dostępne kategorie:");
+            showCategories(shoppingList);
 
-        System.out.print("\nWybierz kategorię: ");
-        int numberOfCategory = scanner.nextInt();
+            System.out.print("\nWybierz kategorię: ");
+            int numberOfCategory = scanner.nextInt();
 
-        showProducts(shoppingList.get(numberOfCategory - 1));
+            showProducts(shoppingList.get(numberOfCategory - 1));
+        }
     }
 
     private void deleteWholeProductsOfShoppingList() {
-        shoppingList.clear();
-        System.out.println("Usunięto wszystkie produkty z listy zakupów.");
+        if (shoppingList.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            shoppingList.clear();
+            System.out.println("Usunięto wszystkie produkty z listy zakupów.");
+        }
     }
 
     private void deleteOneCategoryOfShoppingList(Scanner scanner) {
-        System.out.println("Kategorie:");
-        showCategories(shoppingList);
+        if (shoppingList.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            System.out.println("Kategorie:");
+            showCategories(shoppingList);
 
-        System.out.print("Wybierz kategorię: ");
-        int numberOfCategory = scanner.nextInt();
+            System.out.print("Wybierz kategorię: ");
+            int numberOfCategory = scanner.nextInt();
 
-        shoppingList.remove(numberOfCategory - 1);
+            shoppingList.remove(numberOfCategory - 1);
 
-        System.out.println("Usunięto produkty z jednej kategorii z listy zakupów.");
+            System.out.println("Usunięto produkty z jednej kategorii z listy zakupów.");
+        }
     }
 
     private void deleteOneProductOfShoppingList(Scanner scanner) {
-        System.out.println("Lista zakupów:");
-        showList(shoppingList);
+        if (shoppingList.size() == 0) {
+            System.out.println("Lista jest pusta.");
+        } else {
+            System.out.println("Lista zakupów:");
+            showList(shoppingList);
 
-        System.out.print("Wybierz kategorię: ");
-        int numberOfCategory = scanner.nextInt();
+            System.out.print("Wybierz kategorię: ");
+            int numberOfCategory = scanner.nextInt();
 
-        System.out.print("Wybierz produkt: ");
-        int numberOfProduct = scanner.nextInt();
+            System.out.print("Wybierz produkt: ");
+            int numberOfProduct = scanner.nextInt();
 
-        ArrayList<Product> products = shoppingList.get(numberOfCategory - 1).getProducts();
-        products.remove(numberOfProduct - 1);
+            ArrayList<Product> products = shoppingList.get(numberOfCategory - 1).getProducts();
+            products.remove(numberOfProduct - 1);
 
-        if (products.size() == 0) {
-            shoppingList.remove(numberOfCategory - 1);
+            if (products.size() == 0) {
+                shoppingList.remove(numberOfCategory - 1);
+            }
+
+            System.out.println("Usunięto produkt z listy zakupów.");
         }
-
-        System.out.println("Usunięto produkt z listy zakupów.");
     }
 
     private void saveShoppingListOnDisk() throws IOException {
