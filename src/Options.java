@@ -50,11 +50,17 @@ public class Options {
         try {
             System.out.print("Wybierz kategorię: ");
             numberOfCategory = scanner.nextInt();
+            if (numberOfCategory <= 0 || numberOfCategory > productList.size()) {
+                throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+            }
 
             showProducts(productList.get(numberOfCategory - 1));
 
             System.out.print("Wybierz produkt: ");
             numberOfProduct = scanner.nextInt();
+            if (numberOfProduct <= 0 || numberOfProduct > productList.get(numberOfCategory - 1).getProducts().size()) {
+                throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+            }
         } catch (Exception e) {
             throw new IllegalArgumentException("Podano nieprawidłową wartość.");
         }
@@ -104,6 +110,9 @@ public class Options {
             int numberOfCategory;
             try {
                 numberOfCategory = scanner.nextInt();
+                if (numberOfCategory <= 0 || numberOfCategory > shoppingList.size()) {
+                    throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+                }
             } catch (Exception e) {
                 throw new IllegalArgumentException("Podano nieprawidłową wartość.");
             }
@@ -132,6 +141,9 @@ public class Options {
             int numberOfCategory;
             try {
                 numberOfCategory = scanner.nextInt();
+                if (numberOfCategory <= 0 || numberOfCategory > shoppingList.size()) {
+                    throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+                }
             } catch (Exception e) {
                 throw new IllegalArgumentException("Podano nieprawidłową wartość.");
             }
@@ -153,9 +165,15 @@ public class Options {
             try {
                 System.out.print("Wybierz kategorię: ");
                 numberOfCategory = scanner.nextInt();
+                if (numberOfCategory <= 0 || numberOfCategory > shoppingList.size()) {
+                    throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+                }
 
                 System.out.print("Wybierz produkt: ");
                 numberOfProduct = scanner.nextInt();
+                if (numberOfProduct <= 0 || numberOfProduct > shoppingList.get(numberOfCategory - 1).getProducts().size()) {
+                    throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+                }
             } catch (Exception e) {
                 throw new IllegalArgumentException("Podano nieprawidłową wartość.");
             }
