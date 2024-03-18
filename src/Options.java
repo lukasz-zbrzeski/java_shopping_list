@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Options {
@@ -44,13 +45,19 @@ public class Options {
         System.out.println("Dostępne kategorie:");
         showCategories(productList);
 
-        System.out.print("Wybierz kategorię: ");
-        int numberOfCategory = scanner.nextInt();
+        int numberOfCategory;
+        int numberOfProduct;
+        try {
+            System.out.print("Wybierz kategorię: ");
+            numberOfCategory = scanner.nextInt();
 
-        showProducts(productList.get(numberOfCategory - 1));
+            showProducts(productList.get(numberOfCategory - 1));
 
-        System.out.print("Wybierz produkt: ");
-        int numberOfProduct = scanner.nextInt();
+            System.out.print("Wybierz produkt: ");
+            numberOfProduct = scanner.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+        }
 
         String categoryName = productList.get(numberOfCategory - 1).getCategoryName();
         String productName = productList.get(numberOfCategory - 1).getProducts().get(numberOfProduct - 1).getProductName();
@@ -94,7 +101,12 @@ public class Options {
             showCategories(shoppingList);
 
             System.out.print("\nWybierz kategorię: ");
-            int numberOfCategory = scanner.nextInt();
+            int numberOfCategory;
+            try {
+                numberOfCategory = scanner.nextInt();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+            }
 
             showProducts(shoppingList.get(numberOfCategory - 1));
         }
@@ -117,7 +129,12 @@ public class Options {
             showCategories(shoppingList);
 
             System.out.print("Wybierz kategorię: ");
-            int numberOfCategory = scanner.nextInt();
+            int numberOfCategory;
+            try {
+                numberOfCategory = scanner.nextInt();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+            }
 
             shoppingList.remove(numberOfCategory - 1);
 
@@ -131,12 +148,17 @@ public class Options {
         } else {
             System.out.println("Lista zakupów:");
             showList(shoppingList);
+            int numberOfCategory;
+            int numberOfProduct;
+            try {
+                System.out.print("Wybierz kategorię: ");
+                numberOfCategory = scanner.nextInt();
 
-            System.out.print("Wybierz kategorię: ");
-            int numberOfCategory = scanner.nextInt();
-
-            System.out.print("Wybierz produkt: ");
-            int numberOfProduct = scanner.nextInt();
+                System.out.print("Wybierz produkt: ");
+                numberOfProduct = scanner.nextInt();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Podano nieprawidłową wartość.");
+            }
 
             ArrayList<Product> products = shoppingList.get(numberOfCategory - 1).getProducts();
             products.remove(numberOfProduct - 1);
